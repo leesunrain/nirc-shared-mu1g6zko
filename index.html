@@ -93,7 +93,7 @@
     .shareBadge{background:#fff;color:#111827;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;display:inline-block}
     .shareInfo{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
     .infoBox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:10px 11px}
-    .infoBox .k{font-size:11px;color:#cdd5df;font-weight:800;margin-bottom:4px}.infoBox .v{font-size:16px;font-weight:900}
+    .infoBox .k{font-size:11px;color:#cdd5df;font-weight:800;margin-bottom:4px}.infoBox .v{font-size:16px;font-weight:900}.gkgGrid{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;margin-top:3px}.gkgGrid span{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:900;white-space:nowrap}.gkgGrid em{font-style:normal;color:#cdd5df;font-weight:800}
     .shareTable{background:#fff;color:#111827;border-radius:18px;padding:10px 10px 4px}
     .shareRow{display:grid;grid-template-columns:74px 1fr 1fr 1fr;gap:6px;align-items:center;padding:8px 6px;border-bottom:1px solid #eef2f7}
     .shareRow:last-child{border-bottom:0}
@@ -336,7 +336,7 @@ function shareCardHtml(){
       <div class="infoBox"><div class="k">체중</div><div class="v">${fmt(meta.weight)}kg</div></div>
       <div class="infoBox"><div class="k">대회일</div><div class="v">${meta.dateText}</div></div>
       <div class="infoBox"><div class="k">출발 / 아침식사</div><div class="v">${meta.raceTime} / ${meta.breakfastText}</div></div>
-      <div class="infoBox"><div class="k">g/kg 설정</div><div class="v">D-3 ${meta.d3} · D-2 ${meta.d2} · D-1 ${meta.d1} · 당일 ${meta.rb}</div></div>
+      <div class="infoBox"><div class="k">g/kg 설정</div><div class="gkgGrid"><span><em>D-3</em>${meta.d3}</span><span><em>D-2</em>${meta.d2}</span><span><em>D-1</em>${meta.d1}</span><span><em>당일</em>${meta.rb}</span></div></div>
     </div>
     <div class="shareTable">
       <div class="shareRow head"><div class="c0">구분</div><div class="c1">목표량</div><div class="c2">배치합계</div><div class="c3">차이</div></div>
@@ -436,8 +436,7 @@ function buildSummaryCanvas(){
   const infoBoxes=[
     ['체중',`${fmt(meta.weight)}kg`],
     ['대회일',meta.dateText],
-    ['출발 / 아침식사',`${meta.raceTime} / ${meta.breakfastText}`],
-    ['g/kg 설정',`D-3 ${meta.d3} · D-2 ${meta.d2} · D-1 ${meta.d1} · 당일 ${meta.rb}`]
+    ['출발 / 아침식사',`${meta.raceTime} / ${meta.breakfastText}`]
   ];
   let boxY=210;
   infoBoxes.forEach((it,idx)=>{
@@ -446,6 +445,17 @@ function buildSummaryCanvas(){
     drawText(ctx,it[0],x+22,y+34,20,'#667085','800');
     drawText(ctx,it[1],x+22,y+67,28,'#111827','900');
   });
+  const gx=540, gy=320;
+  roundRect(ctx,gx,gy,480,92,24,'#ffffff','#e5e7eb');
+  drawText(ctx,'g/kg 설정',gx+22,gy+30,20,'#667085','800');
+  drawText(ctx,'D-3',gx+22,gy+62,20,'#667085','800');
+  drawText(ctx,String(meta.d3),gx+120,gy+62,24,'#111827','900');
+  drawText(ctx,'D-2',gx+220,gy+62,20,'#667085','800');
+  drawText(ctx,String(meta.d2),gx+320,gy+62,24,'#111827','900');
+  drawText(ctx,'D-1',gx+22,gy+86,20,'#667085','800');
+  drawText(ctx,String(meta.d1),gx+120,gy+86,24,'#111827','900');
+  drawText(ctx,'당일',gx+220,gy+86,20,'#667085','800');
+  drawText(ctx,String(meta.rb),gx+320,gy+86,24,'#111827','900');
 
   const tableY=460;
   roundRect(ctx,40,tableY,1000,340,28,'#ffffff','#e5e7eb');
@@ -523,8 +533,8 @@ function restore(){
   }catch(e){}
 }
 restore(); guideText(); calculate();
-if('caches' in window){caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('carb-loading-') && k!=='carb-loading-share-v6').map(k=>caches.delete(k)))).catch(()=>{});}
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));}
+if('caches' in window){caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('carb-loading-') && k!=='carb-loading-share-v7').map(k=>caches.delete(k)))).catch(()=>{});}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
