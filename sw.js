@@ -1,4 +1,4 @@
-const CACHE='carb-loading-meal-select-v3';
+const CACHE='carb-loading-meal-select-v5';
 const ASSETS=['./','./index.html','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',e=>{
   self.skipWaiting();
