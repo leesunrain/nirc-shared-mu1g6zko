@@ -41,7 +41,8 @@
     .food .meta{font-size:12px;color:var(--muted);margin-top:3px}
     .food input[type=number]{width:100%;height:40px;border:1px solid #d5dae1;border-radius:10px;padding:0 8px;text-align:right}
     .btn{width:100%;height:54px;border:0;border-radius:15px;background:#111827;color:#fff;font-weight:900;font-size:16px;margin:8px 0 2px;cursor:pointer}
-    .btn.secondary{background:#eef1f4;color:#111827;height:44px;font-size:14px}
+    .btn.secondary{background:#eef1f4;color:#111827;height:48px;font-size:14px}
+    .btn.share{background:#0f766e}
     .helper{font-size:12px;color:var(--muted);line-height:1.5;margin-top:9px}
     .resultHead{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:13px}
     .resultHead .day{font-size:21px;font-weight:950;letter-spacing:-.6px}
@@ -53,12 +54,6 @@
     .target .placed span{display:block;font-size:11px;color:var(--muted);font-weight:800}
     .target .placed strong{display:block;font-size:22px;line-height:1.15;margin-top:2px}
     .target .remain{display:block;font-size:11px;font-weight:900;margin-top:3px}
-    .meal{border-top:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:76px 1fr auto;gap:8px;align-items:start}
-    .meal:first-of-type{border-top:0}
-    .mealName{font-weight:900;font-size:14px}
-    .mealTarget{font-size:11px;color:var(--muted);margin-top:3px}
-    .mealFoods{font-size:14px;line-height:1.55}
-    .mealActual{text-align:right;font-size:12px;color:var(--good);font-weight:800;white-space:nowrap}
     .summary{margin-top:11px;background:#f8fafc;border-radius:14px;padding:12px}
     .summaryTitle{font-size:12px;color:var(--muted);font-weight:800;margin-bottom:6px}
     .summaryGrid{display:flex;gap:7px;flex-wrap:wrap}
@@ -74,10 +69,6 @@
     .sticky{position:sticky;bottom:10px;z-index:20;padding-top:6px}
     .status{font-size:12px;text-align:center;color:var(--muted);margin-top:9px}
     .hidden{display:none!important}
-    @media(max-width:480px){
-      .wrap{padding:12px 10px 40px}.hero{padding:20px 16px}.grid2{grid-template-columns:1fr 1fr}
-      .meal{grid-template-columns:68px 1fr}.mealActual{grid-column:2;text-align:left;margin-top:-4px}.food{grid-template-columns:auto 1fr 92px}
-    }
 
     .mealEdit{border-top:1px solid var(--line);padding:14px 0}
     .mealEdit:first-of-type{border-top:0}
@@ -87,13 +78,41 @@
     .foodRows{display:grid;gap:7px}
     .foodRow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;background:#f8fafc;border-radius:12px;padding:8px 9px}
     .foodRow .foodLabel{font-weight:800;font-size:14px}.foodRow .foodCarb{font-size:11px;color:var(--muted);margin-top:2px}
-    .stepper{display:grid;grid-template-columns:54px 62px 54px;align-items:center;gap:8px}
-    .stepper button{width:54px;height:54px;border:1px solid #cfd5dd;border-radius:14px;background:#fff;font-size:28px;font-weight:900;line-height:1;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-    .stepper input{width:62px;height:54px;border:1px solid #cfd5dd;border-radius:14px;text-align:center;font-size:18px;font-weight:900;background:#fff;padding:0 3px}
+    .stepper{display:grid;grid-template-columns:56px 66px 56px;align-items:center;gap:10px}
+    .stepper button{width:56px;height:56px;border:1px solid #cfd5dd;border-radius:16px;background:#fff;font-size:28px;font-weight:900;line-height:1;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+    .stepper input{width:66px;height:56px;border:1px solid #cfd5dd;border-radius:16px;text-align:center;font-size:18px;font-weight:900;background:#fff;padding:0 3px}
     .dayActions{display:flex;gap:8px;margin-top:10px}
     .miniBtn{border:1px solid #d5dae1;background:#fff;border-radius:11px;padding:8px 10px;font-size:12px;font-weight:800;color:#374151}
     .diff.good{color:var(--good)} .diff.over{color:#9a3412} .diff.under{color:#9a6700}
-    @media(max-width:480px){.stepper{grid-template-columns:50px 58px 50px;gap:7px}.stepper button{width:50px;height:50px;font-size:26px}.stepper input{width:58px;height:50px;font-size:17px}.foodRow{padding:10px}.mealTop{margin-bottom:8px}}
+
+    .shareWrap{display:grid;gap:10px}
+    .sharePreview{background:linear-gradient(180deg,#111827,#1f2937);color:#fff;border-radius:24px;padding:18px;border:1px solid rgba(255,255,255,.08)}
+    .shareHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:14px}
+    .shareTitle{font-size:24px;font-weight:950;letter-spacing:-.5px}
+    .shareSub{font-size:12px;color:#cdd5df;line-height:1.5;margin-top:5px}
+    .shareBadge{background:#fff;color:#111827;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;display:inline-block}
+    .shareInfo{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+    .infoBox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:10px 11px}
+    .infoBox .k{font-size:11px;color:#cdd5df;font-weight:800;margin-bottom:4px}.infoBox .v{font-size:16px;font-weight:900}
+    .shareTable{background:#fff;color:#111827;border-radius:18px;padding:10px 10px 4px}
+    .shareRow{display:grid;grid-template-columns:74px 1fr 1fr 1fr;gap:6px;align-items:center;padding:8px 6px;border-bottom:1px solid #eef2f7}
+    .shareRow:last-child{border-bottom:0}
+    .shareRow.head{font-size:11px;font-weight:900;color:#667085;padding-top:2px;padding-bottom:10px}
+    .shareRow .c0{font-weight:900}
+    .shareRow .c1,.shareRow .c2,.shareRow .c3{font-weight:800;text-align:right}
+    .shareFoods{margin-top:12px;display:grid;gap:8px}
+    .foodSummary{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:10px 11px}
+    .foodSummary b{display:block;font-size:14px;margin-bottom:5px}
+    .foodSummary span{font-size:12px;color:#d7dee8;line-height:1.55;display:block}
+    .shareFoot{margin-top:12px;font-size:11px;color:#cbd5e1;line-height:1.5}
+    .shareBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .previewImg{width:100%;border-radius:18px;border:1px solid var(--line);background:#fff}
+
+    @media(max-width:480px){
+      .wrap{padding:12px 10px 40px}.hero{padding:20px 16px}.grid2{grid-template-columns:1fr 1fr}.food{grid-template-columns:auto 1fr 92px}
+      .stepper{grid-template-columns:54px 62px 54px;gap:8px}.stepper button{width:54px;height:54px}.stepper input{width:62px;height:54px}
+      .shareInfo{grid-template-columns:1fr 1fr}.shareRow{grid-template-columns:60px 1fr 1fr 1fr;font-size:12px}
+    }
   </style>
 </head>
 <body>
@@ -158,6 +177,20 @@
 
   <section id="results" class="hidden"></section>
 
+  <section id="shareSection" class="card hidden">
+    <h2>4. 한 장 요약 이미지</h2>
+    <div class="helper">기본 조건과 D-3·D-2·D-1·대회 당일 아침 결과를 한 장 이미지로 저장하거나 공유할 수 있습니다.</div>
+    <div class="shareWrap" style="margin-top:12px">
+      <div id="sharePreview" class="sharePreview"></div>
+      <div class="shareBtns">
+        <button class="btn secondary" id="saveSummaryBtn" type="button">이미지 저장</button>
+        <button class="btn share" id="shareSummaryBtn" type="button">이미지 공유</button>
+      </div>
+      <img id="summaryImg" class="previewImg hidden" alt="요약 이미지 미리보기">
+      <div id="shareStatus" class="helper"></div>
+    </div>
+  </section>
+
   <section class="card">
     <details>
       <summary>계산 기준 · 주의사항</summary>
@@ -181,14 +214,6 @@ const plans={practical:[8,9,9],max:[8,10,10]};
 const mealNames=['아침','간식 1','점심','간식 2','저녁'];
 const dNormal=[0.205,0.193,0.205,0.193,0.204];
 const dPreRace=[0.25,0.15,0.25,0.20,0.15];
-const prefByMeal={
-  '아침':{rice:.72,banana:.18,tteok:.10},
-  '간식 1':{rice:.05,banana:.45,tteok:.50},
-  '점심':{rice:.75,banana:.10,tteok:.15},
-  '간식 2':{rice:.05,banana:.45,tteok:.50},
-  '저녁':{rice:.78,banana:.10,tteok:.12},
-  '대회 아침':{rice:.58,banana:.27,tteok:.15}
-};
 
 function dateAdd(dateStr,delta){
   if(!dateStr) return null;
@@ -207,106 +232,144 @@ function getFoods(){
   ].filter(f=>f.on && f.carb>0);
 }
 function allowedFoodsForMeal(mealName,foods){
-  const isSnack=mealName.startsWith('간식');
-  if(isSnack) return foods.filter(f=>f.key==='banana'||f.key==='tteok');
+  if(mealName.startsWith('간식')) return foods.filter(f=>f.key==='banana'||f.key==='tteok');
   return foods.filter(f=>f.key==='rice');
 }
-function normalizePref(meal,foods){
-  const raw=prefByMeal[meal]||prefByMeal['대회 아침']; let sum=0; const p={};
-  foods.forEach(f=>{p[f.key]=raw[f.key]||0;sum+=p[f.key]});
-  if(sum<=0){foods.forEach(f=>p[f.key]=1/foods.length);return p}
-  foods.forEach(f=>p[f.key]/=sum); return p;
-}
-function optimize(target,meal,foods){
+function optimize(target,foods){
   if(!foods.length) return {items:[],actual:0};
-  const pref=normalizePref(meal,foods);
-  const ideal={}; foods.forEach(f=>ideal[f.key]=(target*pref[f.key])/f.carb);
-  let best=null;
-  const ranges=foods.map(f=>{
-    const center=ideal[f.key]; const max=Math.max(3,Math.ceil((center+3)/f.step));
-    return Array.from({length:max+1},(_,i)=>i*f.step);
-  });
-  function rec(i,counts){
-    if(i===foods.length){
-      let actual=0,dev=0,units=0;
-      foods.forEach((f,j)=>{actual+=counts[j]*f.carb;dev+=Math.pow(counts[j]-ideal[f.key],2);units+=counts[j]});
-      const score=Math.abs(actual-target)*8 + dev*1.2 + (units===0?9999:0);
-      if(!best||score<best.score) best={score,actual,counts:[...counts]};
-      return;
-    }
-    for(const v of ranges[i]) rec(i+1,[...counts,v]);
+  if(foods.length===1){
+    const f=foods[0], qty=Math.max(f.step, Math.round((target/f.carb)/f.step)*f.step);
+    return {actual:qty*f.carb, items:[{...f, qty}]};
   }
-  rec(0,[]);
-  return {actual:best.actual,items:foods.map((f,i)=>({...f,qty:best.counts[i]})).filter(x=>x.qty>0)};
+  let best=null;
+  const f1=foods[0], f2=foods[1];
+  const max1=Math.max(3,Math.ceil((target/f1.carb)+4));
+  const max2=Math.max(3,Math.ceil((target/f2.carb)+4));
+  for(let i=0;i<=max1;i++){
+    for(let j=0;j<=max2;j++){
+      const q1=i*f1.step, q2=j*f2.step;
+      const actual=q1*f1.carb+q2*f2.carb;
+      const score=Math.abs(actual-target)*10 + (q1+q2)*0.02;
+      if(!best||score<best.score) best={score,actual,items:[{...f1,qty:q1},{...f2,qty:q2}]};
+    }
+  }
+  return {actual:best.actual, items:best.items.filter(x=>x.qty>0)};
 }
-function sumFoods(plans,foods){
-  const totals={};foods.forEach(f=>totals[f.key]=0);
-  plans.forEach(p=>p.items.forEach(it=>totals[it.key]=(totals[it.key]||0)+it.qty));
-  return foods.map(f=>({...f,qty:totals[f.key]||0})).filter(x=>x.qty>0);
-}
-function mealText(items){return items.length?items.map(it=>`${it.name} ${fmt(it.qty)}${it.unit}`).join(' + '):'선택 음식 없음'}
-let planState={days:{}};
 function itemQtyMap(plan,foods){
   const out={}; foods.forEach(f=>out[f.key]=0); plan.items.forEach(it=>out[it.key]=it.qty); return out;
 }
-function mealActual(meal,foods){
-  return foods.reduce((sum,f)=>sum+(Number(meal.items[f.key])||0)*f.carb,0);
-}
-function dayActual(day){return day.meals.reduce((sum,m)=>sum+mealActual(m,day.foods),0)}
+function mealActual(meal,foods){ return foods.reduce((sum,f)=>sum+(Number(meal.items[f.key])||0)*f.carb,0); }
+function dayActual(day){ return day.meals.reduce((sum,m)=>sum+mealActual(m,day.foods),0); }
 function dayTotals(day){
-  const totals={};day.foods.forEach(f=>totals[f.key]=0);
+  const totals={}; day.foods.forEach(f=>totals[f.key]=0);
   day.meals.forEach(m=>day.foods.forEach(f=>totals[f.key]+=Number(m.items[f.key])||0));
   return totals;
 }
+function diffInfo(actual,target){
+  const diff=actual-target;
+  const diffClass=Math.abs(diff)<=5?'good':(diff>0?'over':'under');
+  const diffLabel=Math.abs(Math.round(diff))<=5?'목표 범위':(diff>0?`${Math.abs(Math.round(diff))}g 초과`:`${Math.abs(Math.round(diff))}g 부족`);
+  return {diff, diffClass, diffLabel};
+}
+
+let planState={days:{}, meta:{}};
+
 function foodRowHtml(dayId,mealIndex,f,qty){
   return `<div class="foodRow"><div><div class="foodLabel">${f.name}</div><div class="foodCarb">1${f.unit} = ${fmt(f.carb)}g</div></div>
     <div class="stepper"><button type="button" data-action="minus" data-day="${dayId}" data-meal="${mealIndex}" data-food="${f.key}">−</button>
     <input inputmode="decimal" type="number" min="0" step="${f.step}" value="${fmt(qty)}" data-action="qty" data-day="${dayId}" data-meal="${mealIndex}" data-food="${f.key}">
     <button type="button" data-action="plus" data-day="${dayId}" data-meal="${mealIndex}" data-food="${f.key}">+</button></div></div>`;
 }
+
 function renderDay(dayId){
-  const day=planState.days[dayId]; if(!day)return '';
-  const actual=dayActual(day), diff=actual-day.target, totals=dayTotals(day);
-  const diffClass=Math.abs(diff)<=5?'good':(diff>0?'over':'under');
-  const diffText=`${diff>0?'+':''}${Math.round(diff)}g`;
+  const day=planState.days[dayId]; if(!day) return '';
+  const actual=dayActual(day), totals=dayTotals(day), info=diffInfo(actual,day.target);
   return `<section class="card ${day.race?'race':''}" data-day-card="${dayId}">${day.race?'<span class="badge">RACE DAY</span>':''}
     <div class="resultHead"><div><div class="day">${day.label}</div><div class="date">${day.dateText}</div></div>
       <div class="target">
         <div class="goal"><b>${Math.round(day.target)}g</b><small>${day.race?'아침':'하루'} 목표 · ${day.kg} g/kg</small></div>
-        <div class="placed"><span>내 배치 합계</span><strong>${Math.round(actual)}g</strong><small class="remain diff ${diffClass}">${Math.abs(Math.round(diff))<=5?'목표 범위':(diff>0?`${Math.abs(Math.round(diff))}g 초과`:`${Math.abs(Math.round(diff))}g 부족`)}</small></div>
+        <div class="placed"><span>내 배치 합계</span><strong>${Math.round(actual)}g</strong><small class="remain diff ${info.diffClass}">${info.diffLabel}</small></div>
       </div></div>
     ${day.meals.map((m,i)=>`<div class="mealEdit"><div class="mealTop"><div class="left"><b>${m.name}</b><small>목표 ${Math.round(m.target)}g</small></div><div class="actual">약 ${Math.round(mealActual(m,day.foods))}g</div></div><div class="foodRows">${allowedFoodsForMeal(m.name,day.foods).map(f=>foodRowHtml(dayId,i,f,m.items[f.key]||0)).join('')}</div></div>`).join('')}
     <div class="summary"><div class="summaryTitle">${day.race?'아침':'하루'} 음식 총량</div><div class="summaryGrid">${day.foods.map(f=>`<span class="pill">${f.name} ${fmt(totals[f.key])}${f.unit}</span>`).join('')}</div></div>
-    <div class="totalbar"><span>${day.race?'아침':'하루'} 목표 / 내 배치 합계 <span class="diff ${diffClass}">(${diffText})</span></span><b>${Math.round(day.target)}g / ${Math.round(actual)}g</b></div>
+    <div class="totalbar"><span>${day.race?'아침':'하루'} 목표 / 내 배치 합계</span><b>${Math.round(day.target)}g / ${Math.round(actual)}g</b></div>
     <div class="dayActions"><button class="miniBtn" type="button" data-action="resetDay" data-day="${dayId}">권장 조합 다시 채우기</button><button class="miniBtn" type="button" data-action="zeroDay" data-day="${dayId}">전부 0으로</button></div>
     ${day.note?`<div class="note">${day.note}</div>`:''}
   </section>`;
 }
+
 function buildDay(dayId,label,date,target,kg,distribution,foods,isD1=false){
-  const meals=mealNames.map((m,i)=>{const mt=target*distribution[i];const allowed=allowedFoodsForMeal(m,foods);const p=optimize(mt,m,allowed);return{name:m,target:mt,items:itemQtyMap(p,foods)};});
+  const meals=mealNames.map((m,i)=>{
+    const mt=target*distribution[i];
+    const allowed=allowedFoodsForMeal(m,foods);
+    const p=optimize(mt,allowed);
+    return {name:m,target:mt,items:itemQtyMap(p,foods)};
+  });
   planState.days[dayId]={id:dayId,label,dateText:dateLabel(date),target,kg,foods,meals,race:false,
     note:isD1?'<b>D-1 포인트</b> · 저녁까지 억지로 몰아먹지 말고 아침·점심·오후에 앞당겨 섭취합니다. 저녁은 저지방·저섬유질 위주로 가볍게, 평소 먹어본 음식만 권장합니다.':''};
 }
 function buildRaceDay(dayId,date,target,kg,foods,lead,raceTime){
-  const allowed=allowedFoodsForMeal('대회 아침',foods); const p=optimize(target,'대회 아침',allowed), breakfast=timeMinus(raceTime,lead);
+  const allowed=allowedFoodsForMeal('대회 아침',foods);
+  const p=optimize(target,allowed), breakfast=timeMinus(raceTime,lead);
   planState.days[dayId]={id:dayId,label:'대회 당일 아침',dateText:`${dateLabel(date)} · ${breakfast} 식사 → ${raceTime} 출발`,target,kg,foods,race:true,
     meals:[{name:'아침',target,items:itemQtyMap(p,foods)}],
     note:'<b>당일 핵심</b> · 지방·섬유질은 낮추고 평소 먹어본 음식 위주로 구성하세요. 수분도 평소 루틴대로 과하지 않게 섭취합니다.'};
 }
+
+function shareCardHtml(){
+  const meta=planState.meta;
+  const days=['d3','d2','d1','race'];
+  const rows=days.map(id=>{
+    const day=planState.days[id]; if(!day) return '';
+    const actual=Math.round(dayActual(day));
+    const info=diffInfo(actual,day.target);
+    return `<div class="shareRow"><div class="c0">${day.label}</div><div class="c1">${Math.round(day.target)}g</div><div class="c2">${actual}g</div><div class="c3 ${info.diffClass}">${info.diff>0?'+':''}${Math.round(info.diff)}g</div></div>`;
+  }).join('');
+  const foodCards=days.map(id=>{
+    const day=planState.days[id]; if(!day) return '';
+    const totals=dayTotals(day); const parts=[];
+    day.foods.forEach(f=>{ if((totals[f.key]||0)>0) parts.push(`${f.name} ${fmt(totals[f.key])}${f.unit}`); });
+    return `<div class="foodSummary"><b>${day.label}</b><span>${parts.join(' · ')||'없음'}</span></div>`;
+  }).join('');
+  return `<div class="shareHead"><div><div class="shareBadge">공유용 한 장 요약</div><div class="shareTitle">마라톤 카보로딩 계획표</div><div class="shareSub">기본 조건과 D-3, D-2, D-1, 대회 당일 아침 결과를 한 장으로 정리했습니다.</div></div></div>
+    <div class="shareInfo">
+      <div class="infoBox"><div class="k">체중</div><div class="v">${fmt(meta.weight)}kg</div></div>
+      <div class="infoBox"><div class="k">대회일</div><div class="v">${meta.dateText}</div></div>
+      <div class="infoBox"><div class="k">출발 / 아침식사</div><div class="v">${meta.raceTime} / ${meta.breakfastText}</div></div>
+      <div class="infoBox"><div class="k">g/kg 설정</div><div class="v">D-3 ${meta.d3} · D-2 ${meta.d2} · D-1 ${meta.d1} · 당일 ${meta.rb}</div></div>
+    </div>
+    <div class="shareTable">
+      <div class="shareRow head"><div class="c0">구분</div><div class="c1">목표량</div><div class="c2">배치합계</div><div class="c3">차이</div></div>
+      ${rows}
+    </div>
+    <div class="shareFoods">${foodCards}</div>
+    <div class="shareFoot">※ 기준 음식: 밥 ${fmt(+$('riceCarb').value||63.4)}g/공기 · 바나나 ${fmt(+$('bananaCarb').value||27)}g/개 · 가래떡 ${fmt(+$('tteokCarb').value||26.2)}g/줄</div>`;
+}
+
+function updateSharePreview(){
+  const section=$('shareSection');
+  if(!planState.days || !planState.days.d3){ section.classList.add('hidden'); return; }
+  $('sharePreview').innerHTML=shareCardHtml();
+  section.classList.remove('hidden');
+}
+
 function rerenderDay(dayId){
   const old=document.querySelector(`[data-day-card="${dayId}"]`); if(!old)return;
   const box=document.createElement('div'); box.innerHTML=renderDay(dayId).trim(); old.replaceWith(box.firstElementChild);
+  updateSharePreview();
 }
+
 function guideText(){
   const h=+$('breakfastLead').value;
   const map={1:'약 1 g/kg 정도부터 보수적으로',2:'약 1~2 g/kg 범위',3:'약 2~3 g/kg 범위',4:'약 3~4 g/kg 범위'};
   $('morningGuide').textContent=`대회 아침 참고: 출발 ${h}시간 전이라면 ${map[h]}에서 위장 적응도에 맞추는 방식이 실용적입니다. 앱 기본값은 보수적으로 설정되어 있습니다.`;
 }
+
 function calculate(){
   const weight=+$('weight').value; const date=$('raceDate').value; const raceTime=$('raceTime').value||'08:00';
   const foods=getFoods(); if(!weight||weight<35){alert('체중을 확인해 주세요.');return} if(!date){alert('대회일을 선택해 주세요.');return} if(!foods.length){alert('먹을 음식을 하나 이상 선택해 주세요.');return}
   const d3=+$('d3').value,d2=+$('d2').value,d1=+$('d1').value, rb=+$('raceBreakfast').value, lead=+$('breakfastLead').value;
-  planState={days:{}};
+  planState={days:{}, meta:{weight, date, dateText:dateLabel(dateAdd(date,0)), raceTime, breakfastText:`${timeMinus(raceTime,lead)} 식사`, d3, d2, d1, rb, lead}};
   buildDay('d3','D-3',dateAdd(date,-3),weight*d3,d3,dNormal,foods,false);
   buildDay('d2','D-2',dateAdd(date,-2),weight*d2,d2,dNormal,foods,false);
   buildDay('d1','D-1',dateAdd(date,-1),weight*d1,d1,dPreRace,foods,true);
@@ -315,18 +378,20 @@ function calculate(){
   r.innerHTML=`<section class="card"><h2>내 카보로딩 일정</h2><div class="helper">처음에는 권장 수량이 자동으로 들어갑니다. <b>아침·점심·저녁은 밥만</b>, <b>간식은 바나나·가래떡만</b> 표시되며 큰 − / + 버튼으로 바꾸면 하루 합계가 즉시 다시 계산됩니다.</div></section>`+
     ['d3','d2','d1','race'].map(renderDay).join('');
   r.classList.remove('hidden');
+  updateSharePreview();
   setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'start'}),50);
   localStorage.setItem('carbLoadingSettings',JSON.stringify({weight,date,raceTime,d3,d2,d1,rb,lead,
     useRice:$('useRice').checked,useBanana:$('useBanana').checked,useTteok:$('useTteok').checked,
     riceCarb:$('riceCarb').value,bananaCarb:$('bananaCarb').value,tteokCarb:$('tteokCarb').value}));
 }
+
 $('results').addEventListener('click',e=>{
   const b=e.target.closest('[data-action]'); if(!b)return; const a=b.dataset.action, dayId=b.dataset.day; const day=planState.days[dayId]; if(!day)return;
   if(a==='plus'||a==='minus'){
     const mi=+b.dataset.meal, key=b.dataset.food, f=day.foods.find(x=>x.key===key); if(!f)return;
     const cur=Number(day.meals[mi].items[key])||0; day.meals[mi].items[key]=Math.max(0,cur+(a==='plus'?f.step:-f.step)); rerenderDay(dayId);
   } else if(a==='resetDay'){
-    day.meals.forEach(m=>{const allowed=allowedFoodsForMeal(m.name,day.foods);const p=optimize(m.target,m.name,allowed);m.items=itemQtyMap(p,day.foods)}); rerenderDay(dayId);
+    day.meals.forEach(m=>{const allowed=allowedFoodsForMeal(m.name,day.foods);const p=optimize(m.target,allowed);m.items=itemQtyMap(p,day.foods)}); rerenderDay(dayId);
   } else if(a==='zeroDay'){
     day.meals.forEach(m=>day.foods.forEach(f=>m.items[f.key]=0)); rerenderDay(dayId);
   }
@@ -344,6 +409,111 @@ $('breakfastLead').addEventListener('change',()=>{guideText();calculate();}); $(
 ['weight','raceDate','raceTime','d3','d2','d1','raceBreakfast','riceCarb','bananaCarb','tteokCarb','useRice','useBanana','useTteok'].forEach(id=>{
   $(id).addEventListener('change',()=>calculate());
 });
+
+function roundRect(ctx,x,y,w,h,r,fill,stroke){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r);
+  if(fill){ctx.fillStyle=fill;ctx.fill();}
+  if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}
+}
+function drawText(ctx,text,x,y,size=26,color='#111827',weight='700',align='left'){
+  ctx.fillStyle=color; ctx.font=`${weight} ${size}px -apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans KR,sans-serif`; ctx.textAlign=align; ctx.fillText(text,x,y);
+}
+function buildSummaryCanvas(){
+  const canvas=document.createElement('canvas');
+  canvas.width=1080; canvas.height=1620;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#f4f6f8'; ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  roundRect(ctx,40,36,1000,150,34,'#111827');
+  drawText(ctx,'마라톤 카보로딩 계획표',78,112,48,'#ffffff','900');
+  drawText(ctx,'기본 조건과 D-3 · D-2 · D-1 · 대회 당일 아침 결과 요약',78,156,22,'#cbd5e1','600');
+  roundRect(ctx,850,62,140,42,20,'#ffffff');
+  drawText(ctx,'공유용',920,91,22,'#111827','900','center');
+
+  const meta=planState.meta;
+  const infoBoxes=[
+    ['체중',`${fmt(meta.weight)}kg`],
+    ['대회일',meta.dateText],
+    ['출발 / 아침식사',`${meta.raceTime} / ${meta.breakfastText}`],
+    ['g/kg 설정',`D-3 ${meta.d3} · D-2 ${meta.d2} · D-1 ${meta.d1} · 당일 ${meta.rb}`]
+  ];
+  let boxY=210;
+  infoBoxes.forEach((it,idx)=>{
+    const col=idx%2,row=Math.floor(idx/2); const x=40+col*500, y=boxY+row*110;
+    roundRect(ctx,x,y,480,92,24,'#ffffff','#e5e7eb');
+    drawText(ctx,it[0],x+22,y+34,20,'#667085','800');
+    drawText(ctx,it[1],x+22,y+67,28,'#111827','900');
+  });
+
+  const tableY=460;
+  roundRect(ctx,40,tableY,1000,340,28,'#ffffff','#e5e7eb');
+  drawText(ctx,'구분',90,518,22,'#667085','900');
+  drawText(ctx,'목표량',445,518,22,'#667085','900','right');
+  drawText(ctx,'배치합계',710,518,22,'#667085','900','right');
+  drawText(ctx,'차이',970,518,22,'#667085','900','right');
+  const order=['d3','d2','d1','race'];
+  order.forEach((id,i)=>{
+    const day=planState.days[id], actual=Math.round(dayActual(day)); const info=diffInfo(actual,day.target); const y=578+i*62;
+    ctx.strokeStyle='#eef2f7'; ctx.beginPath(); ctx.moveTo(66,y-28); ctx.lineTo(1014,y-28); ctx.stroke();
+    drawText(ctx,day.label,90,y,28,'#111827','900');
+    drawText(ctx,`${Math.round(day.target)}g`,445,y,28,'#111827','800','right');
+    drawText(ctx,`${actual}g`,710,y,28,'#111827','800','right');
+    const dText=`${info.diff>0?'+':''}${Math.round(info.diff)}g`;
+    const dColor=info.diffClass==='good'?'#116149':(info.diffClass==='over'?'#9a3412':'#9a6700');
+    drawText(ctx,dText,970,y,28,dColor,'900','right');
+  });
+
+  let fy=840;
+  drawText(ctx,'날짜별 음식 총량',52,fy,30,'#111827','900');
+  fy+=26;
+  order.forEach((id,idx)=>{
+    const day=planState.days[id], totals=dayTotals(day);
+    roundRect(ctx,40,fy+idx*128,1000,108,24,'#ffffff','#e5e7eb');
+    drawText(ctx,day.label,68,fy+idx*128+38,24,'#111827','900');
+    const parts=[]; day.foods.forEach(f=>{ if((totals[f.key]||0)>0) parts.push(`${f.name} ${fmt(totals[f.key])}${f.unit}`); });
+    const line=parts.join('   ·   ') || '없음';
+    drawText(ctx,line,68,fy+idx*128+76,24,'#374151','700');
+  });
+
+  roundRect(ctx,40,1390,1000,170,28,'#111827');
+  drawText(ctx,`기준 음식: 밥 ${fmt(+$('riceCarb').value||63.4)}g/공기 · 바나나 ${fmt(+$('bananaCarb').value||27)}g/개 · 가래떡 ${fmt(+$('tteokCarb').value||26.2)}g/줄`,72,1450,22,'#e5e7eb','700');
+  drawText(ctx,'※ 이 이미지는 앱의 현재 입력값과 배치 결과를 바탕으로 자동 생성되었습니다.',72,1492,20,'#cbd5e1','600');
+  drawText(ctx,'마라톤 카보로딩',540,1540,28,'#ffffff','900','center');
+  return canvas;
+}
+function dataURLToFile(dataurl, filename) {
+  const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]);
+  let n = bstr.length; const u8arr = new Uint8Array(n); while(n--){u8arr[n]=bstr.charCodeAt(n);} return new File([u8arr], filename, {type:mime});
+}
+function updatePreviewImage(url){ const img=$('summaryImg'); img.src=url; img.classList.remove('hidden'); }
+function saveBlobUrl(url,filename){ const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); }
+
+$('saveSummaryBtn').addEventListener('click',()=>{
+  if(!planState.days.d3){ alert('먼저 계산표를 만들어 주세요.'); return; }
+  const url=buildSummaryCanvas().toDataURL('image/png');
+  updatePreviewImage(url); saveBlobUrl(url,'marathon_carb_loading_summary.png');
+  $('shareStatus').textContent='요약 이미지를 저장했습니다.';
+});
+$('shareSummaryBtn').addEventListener('click',async()=>{
+  if(!planState.days.d3){ alert('먼저 계산표를 만들어 주세요.'); return; }
+  const url=buildSummaryCanvas().toDataURL('image/png');
+  updatePreviewImage(url);
+  const file=dataURLToFile(url,'marathon_carb_loading_summary.png');
+  try{
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:'마라톤 카보로딩 계획표',text:'카보로딩 요약 이미지'});
+      $('shareStatus').textContent='요약 이미지를 공유했습니다.';
+    }else{
+      saveBlobUrl(url,'marathon_carb_loading_summary.png');
+      $('shareStatus').textContent='이 기기에서는 파일 공유가 제한되어 이미지를 저장하도록 처리했습니다.';
+    }
+  }catch(err){
+    $('shareStatus').textContent='공유가 취소되었거나 지원되지 않아 저장 방식으로 대체했습니다.';
+  }
+});
+
 function restore(){
   try{const s=JSON.parse(localStorage.getItem('carbLoadingSettings')||'null'); if(!s)return;
     if(s.weight)$('weight').value=s.weight;if(s.date)$('raceDate').value=s.date;if(s.raceTime)$('raceTime').value=s.raceTime;
@@ -352,9 +522,9 @@ function restore(){
     ['riceCarb','bananaCarb','tteokCarb'].forEach(k=>{if(s[k])$(k).value=s[k]});
   }catch(e){}
 }
-restore();guideText();calculate();
-if('caches' in window){caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('carb-loading-') && k!=='carb-loading-meal-select-v5').map(k=>caches.delete(k)))).catch(()=>{});}
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=5',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));}
+restore(); guideText(); calculate();
+if('caches' in window){caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('carb-loading-') && k!=='carb-loading-share-v6').map(k=>caches.delete(k)))).catch(()=>{});}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
