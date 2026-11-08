@@ -120,7 +120,7 @@
   <section class="hero">
     <div style="display:inline-block;background:#fff;color:#111827;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;margin-bottom:8px">끼니별 직접 선택형</div>
     <h1>마라톤 카보로딩</h1>
-    <p>아침·점심·저녁은 밥만, 간식은 바나나·가래떡만 표시합니다. 큰 − / + 버튼으로 수량을 바꾸면 합계가 즉시 계산됩니다.</p>
+    <p>아침·점심·저녁은 밥만, 간식은 바나나·가래떡을 0.5단위로 조절합니다. 대회 당일 아침은 밥·바나나·가래떡 3가지를 나눠 먹을 수 있습니다.</p>
   </section>
 
   <section class="card">
@@ -170,7 +170,7 @@
       <div><div class="name">가래떡</div><div class="meta">1줄 · 사용자 엑셀 기준</div></div>
       <div class="field"><label>탄수화물 g</label><input id="tteokCarb" type="number" step="0.1" value="26.2"></div>
     </div>
-    <div class="helper">수치는 순수 탄수화물 기준입니다. 식사에는 밥, 간식에는 바나나·가래떡만 자동으로 배치됩니다.</div>
+    <div class="helper">수치는 순수 탄수화물 기준입니다. 평소 식사는 밥, 간식은 바나나·가래떡을 0.5단위로 배치하며, 대회 당일 아침은 세 가지 모두 사용할 수 있습니다.</div>
   </section>
 
   <div class="sticky"><button class="btn" id="calcBtn">내 카보로딩표 다시 계산하기</button></div>
@@ -227,33 +227,34 @@ function timeMinus(time,h){
 function getFoods(){
   return [
     {key:'rice',name:'밥',unit:'공기',carb:+$('riceCarb').value||63.4,on:$('useRice').checked,step:.5},
-    {key:'banana',name:'바나나',unit:'개',carb:+$('bananaCarb').value||27,on:$('useBanana').checked,step:1},
-    {key:'tteok',name:'가래떡',unit:'줄',carb:+$('tteokCarb').value||26.2,on:$('useTteok').checked,step:1}
+    {key:'banana',name:'바나나',unit:'개',carb:+$('bananaCarb').value||27,on:$('useBanana').checked,step:.5},
+    {key:'tteok',name:'가래떡',unit:'줄',carb:+$('tteokCarb').value||26.2,on:$('useTteok').checked,step:.5}
   ].filter(f=>f.on && f.carb>0);
 }
 function allowedFoodsForMeal(mealName,foods){
+  if(mealName==='대회 아침') return foods;
   if(mealName.startsWith('간식')) return foods.filter(f=>f.key==='banana'||f.key==='tteok');
   return foods.filter(f=>f.key==='rice');
 }
 function optimize(target,foods){
   if(!foods.length) return {items:[],actual:0};
-  if(foods.length===1){
-    const f=foods[0], qty=Math.max(f.step, Math.round((target/f.carb)/f.step)*f.step);
-    return {actual:qty*f.carb, items:[{...f, qty}]};
-  }
   let best=null;
-  const f1=foods[0], f2=foods[1];
-  const max1=Math.max(3,Math.ceil((target/f1.carb)+4));
-  const max2=Math.max(3,Math.ceil((target/f2.carb)+4));
-  for(let i=0;i<=max1;i++){
-    for(let j=0;j<=max2;j++){
-      const q1=i*f1.step, q2=j*f2.step;
-      const actual=q1*f1.carb+q2*f2.carb;
-      const score=Math.abs(actual-target)*10 + (q1+q2)*0.02;
-      if(!best||score<best.score) best={score,actual,items:[{...f1,qty:q1},{...f2,qty:q2}]};
+  const maxSteps=foods.map(f=>Math.max(2,Math.ceil(target/f.carb/f.step)+4));
+  function rec(i,qtys){
+    if(i===foods.length){
+      const items=foods.map((f,idx)=>({...f,qty:qtys[idx]}));
+      const actual=items.reduce((sum,it)=>sum+it.qty*it.carb,0);
+      const used=items.filter(it=>it.qty>0).length;
+      const totalUnits=items.reduce((sum,it)=>sum+it.qty,0);
+      const score=Math.abs(actual-target)*10 + Math.abs(used-Math.min(foods.length,3))*0.25 + totalUnits*0.01;
+      if(!best||score<best.score) best={score,actual,items};
+      return;
     }
+    const f=foods[i];
+    for(let n=0;n<=maxSteps[i];n++) rec(i+1,[...qtys,n*f.step]);
   }
-  return {actual:best.actual, items:best.items.filter(x=>x.qty>0)};
+  rec(0,[]);
+  return {actual:best.actual,items:best.items.filter(x=>x.qty>0)};
 }
 function itemQtyMap(plan,foods){
   const out={}; foods.forEach(f=>out[f.key]=0); plan.items.forEach(it=>out[it.key]=it.qty); return out;
@@ -312,7 +313,7 @@ function buildRaceDay(dayId,date,target,kg,foods,lead,raceTime){
   const allowed=allowedFoodsForMeal('대회 아침',foods);
   const p=optimize(target,allowed), breakfast=timeMinus(raceTime,lead);
   planState.days[dayId]={id:dayId,label:'대회 당일 아침',dateText:`${dateLabel(date)} · ${breakfast} 식사 → ${raceTime} 출발`,target,kg,foods,race:true,
-    meals:[{name:'아침',target,items:itemQtyMap(p,foods)}],
+    meals:[{name:'대회 아침',target,items:itemQtyMap(p,foods)}],
     note:'<b>당일 핵심</b> · 지방·섬유질은 낮추고 평소 먹어본 음식 위주로 구성하세요. 수분도 평소 루틴대로 과하지 않게 섭취합니다.'};
 }
 
@@ -375,7 +376,7 @@ function calculate(){
   buildDay('d1','D-1',dateAdd(date,-1),weight*d1,d1,dPreRace,foods,true);
   buildRaceDay('race',dateAdd(date,0),weight*rb,rb,foods,lead,raceTime);
   const r=$('results');
-  r.innerHTML=`<section class="card"><h2>내 카보로딩 일정</h2><div class="helper">처음에는 권장 수량이 자동으로 들어갑니다. <b>아침·점심·저녁은 밥만</b>, <b>간식은 바나나·가래떡만</b> 표시되며 큰 − / + 버튼으로 바꾸면 하루 합계가 즉시 다시 계산됩니다.</div></section>`+
+  r.innerHTML=`<section class="card"><h2>내 카보로딩 일정</h2><div class="helper">처음에는 권장 수량이 자동으로 들어갑니다. <b>아침·점심·저녁은 밥만</b>, <b>간식은 바나나·가래떡을 0.5단위</b>로 조절하고, <b>대회 당일 아침은 밥·바나나·가래떡 3가지</b>를 직접 나눠 먹을 수 있습니다.</div></section>`+
     ['d3','d2','d1','race'].map(renderDay).join('');
   r.classList.remove('hidden');
   updateSharePreview();
@@ -533,8 +534,8 @@ function restore(){
   }catch(e){}
 }
 restore(); guideText(); calculate();
-if('caches' in window){caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('carb-loading-') && k!=='carb-loading-share-v7').map(k=>caches.delete(k)))).catch(()=>{});}
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));}
+if('caches' in window){caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('carb-loading-') && k!=='carb-loading-raceday-v8').map(k=>caches.delete(k)))).catch(()=>{});}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=8',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
