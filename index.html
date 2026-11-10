@@ -108,6 +108,16 @@
     .shareBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
     .previewImg{width:100%;border-radius:18px;border:1px solid var(--line);background:#fff}
 
+
+    .guideGrid{display:grid;gap:12px}
+    .guideIntro{font-size:13px;line-height:1.65;color:#374151;background:#f8fafc;border-radius:14px;padding:12px}
+    .guideFacts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .guideFact{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px}
+    .guideFact b{display:block;font-size:14px;margin-bottom:4px}.guideFact span{font-size:12px;color:var(--muted);line-height:1.5}
+    .guidePhoto{background:#f8fafc;border-radius:16px;padding:10px;border:1px solid #edf0f3}
+    .guidePhoto img{width:100%;display:block;border-radius:12px;max-height:430px;object-fit:contain;background:#fff}
+    .guidePhoto b{display:block;font-size:14px;margin:9px 2px 4px}.guidePhoto p{margin:0 2px 3px;font-size:12px;line-height:1.55;color:var(--muted)}
+    .guideNote{font-size:12px;line-height:1.6;color:#6f4406;background:#fff8e8;border-left:4px solid #c78a30;border-radius:8px;padding:10px 12px}
     @media(max-width:480px){
       .wrap{padding:12px 10px 40px}.hero{padding:20px 16px}.grid2{grid-template-columns:1fr 1fr}.food{grid-template-columns:auto 1fr 92px}
       .stepper{grid-template-columns:54px 62px 54px;gap:8px}.stepper button{width:54px;height:54px}.stepper input{width:62px;height:54px}
@@ -173,12 +183,47 @@
     <div class="helper">수치는 순수 탄수화물 기준입니다. 평소 식사는 밥, 간식은 바나나·가래떡을 0.5단위로 배치하며, 대회 당일 아침은 세 가지 모두 사용할 수 있습니다.</div>
   </section>
 
+
+  <section class="card">
+    <h2>4. 카보로딩 음식 기준 설명</h2>
+    <div class="guideGrid">
+      <div class="guideIntro">
+        이 앱은 <b>식품의 전체 무게가 아니라 순수 탄수화물량</b>을 기준으로 계산합니다. 현재 기본값은 
+        <b>밥 1공기 63.4g</b>, <b>바나나 1개 27g</b>, <b>가래떡 1줄 26.2g</b>의 탄수화물로 설정되어 있습니다.
+      </div>
+      <div class="guideFacts">
+        <div class="guideFact"><b>밥</b><span>1공기 약 200g 기준 → 탄수화물 약 63.4g</span></div>
+        <div class="guideFact"><b>바나나</b><span>앱 계산 기준 1개 → 탄수화물 27g. 사진의 154g 바나나는 실물 크기 참고용입니다.</span></div>
+        <div class="guideFact"><b>가래떡</b><span>앱 계산 기준 1줄 → 탄수화물 26.2g. 제품 크기에 따라 실제 값은 달라질 수 있습니다.</span></div>
+        <div class="guideFact"><b>섭취량</b><span>D-3·D-2·D-1은 체중×g/kg, 대회 당일 아침은 현재 2g/kg 기준으로 계산합니다.</span></div>
+      </div>
+      <div class="guidePhoto">
+        <img src="banana_ref.jpg" alt="154g 바나나 실물 예시">
+        <b>바나나 실물 예시</b>
+        <p>사진 속 바나나는 약 154g으로 측정된 예시입니다. 앱에서는 사용자가 정한 1개당 탄수화물값을 기준으로 계산합니다.</p>
+      </div>
+      <div class="guidePhoto">
+        <img src="tteok_ref.jpg" alt="가래떡 팩 실물 예시">
+        <b>가래떡 팩 실물 예시</b>
+        <p>가래떡은 제품별 굵기와 길이가 달라질 수 있으므로, 포장 영양정보나 실제 무게가 다르면 앱의 탄수화물값을 수정해 사용합니다.</p>
+      </div>
+      <div class="guidePhoto">
+        <img src="full_food_ref.jpg" alt="바나나와 가래떡 준비 예시">
+        <b>대회 전 준비 예시</b>
+        <p>바나나와 가래떡을 미리 준비해 두고, 앱에서 계산한 D-3·D-2·D-1·대회 당일 수량에 맞춰 나눠 먹는 방식입니다.</p>
+      </div>
+      <div class="guideNote">
+        <b>중요:</b> 사진은 실물 크기를 이해하기 위한 참고자료입니다. 같은 바나나·가래떡이라도 크기와 제품에 따라 탄수화물량이 달라질 수 있으므로, 가능하면 포장 영양정보 또는 실제 중량을 우선하세요.
+      </div>
+    </div>
+  </section>
+
   <div class="sticky"><button class="btn" id="calcBtn">내 카보로딩표 다시 계산하기</button></div>
 
   <section id="results" class="hidden"></section>
 
   <section id="shareSection" class="card hidden">
-    <h2>4. 한 장 요약 이미지</h2>
+    <h2>5. 한 장 요약 이미지</h2>
     <div class="helper">기본 조건과 D-3·D-2·D-1·대회 당일 아침 결과를 한 장 이미지로 저장하거나 공유할 수 있습니다.</div>
     <div class="shareWrap" style="margin-top:12px">
       <div id="sharePreview" class="sharePreview"></div>
@@ -535,7 +580,7 @@ function restore(){
 }
 restore(); guideText(); calculate();
 if('caches' in window){caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('carb-loading-') && k!=='carb-loading-raceday-v8').map(k=>caches.delete(k)))).catch(()=>{});}
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=8',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=9',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));}
 </script>
 </body>
 </html>
